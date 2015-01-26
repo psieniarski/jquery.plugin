@@ -1,0 +1,43 @@
+
+Specyfication:
+
+Plugin Constructor:
+$.Plugin.create(pluginName, properties, prototypeProperties); 
+
+Example:
+$.Plugin.register('name', { 
+	initialize:	  function(elem, options) {}, 
+	defaults: {}	
+});
+
+find:
+$.Plugin.find('name');
+
+
+Extension:
+$.Plugin.find('name').extend(extensionName, properties, prototypeProperties);
+or 
+$.Plugin.plugins['name'].extend(extensionName, properties, prototypeProperties)
+
+
+$.Plugin.plugins['name'].Extension('extension', {
+	initialize:     function(elem, options) {},
+	defaults: {}
+});
+
+
+wrapper: 
+
+$.fn.Plugin.plugins['name'] = function(options) {
+	...
+	new $.Plugin.find('name'); 
+}
+
+Assumptions:
+- ability to create multiple plug-ins based on Plugin constructor 
+- Plugin prototype must have 'extend' method
+- extensions may by stored in any obiect
+- $.pluginName and $.fn.pluginName must be able to create wrappers
+- each extension must have own namespace and reference to parent. 
+- object specific methods must be assigned to instance
+- methods with common functional must be stored in prototype object
